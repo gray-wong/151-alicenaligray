@@ -7008,7 +7008,7 @@ foundationunits(TOTALFOUNDATIONS) :-
   evaluate(min(TOTAL,10),TOTALFOUNDATIONS)
 
 sigimpunits(TOTALSIGIMP) :- 
-  setofall([UNITS,COURSE,X], josen(sigsection(X),COURSE) & ~josen(breadthsection(X),COURSE) &
+  setofall([UNITS,COURSE,X], josen(sigsection(X),COURSE) &
   units(COURSE,UNITS), S) &
   map(first,S,L) &
   sum(L,TOTALSIGIMP)
@@ -7831,9 +7831,9 @@ style(consultapchart, color, "888888") :- ~consultapchart
 
 consultapchart :- josen(mathsection(1),mathap)
 
-style(row(X), display, "") :- josen(S,X) &  & ~isundergrad(X)
+style(row(X), display, "") :- josen(S,X) % & ~isundergrad(X)
 style(row(X), display, "none") :- courses(Section,X) & ~holds(X)
-style(row(X), display, "none") :- isundergrad(X)
+% style(row(X), display, "none") :- isundergrad(X)
 
 style(twoundergrad, display, "") :- josen(sigsection(1),twoundergradbox)
 style(twoundergrad, display, "none") :- ~josen(sigsection(1),twoundergradbox)
