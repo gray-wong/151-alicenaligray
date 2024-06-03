@@ -204,7 +204,7 @@
                 <td width='140'><input name='sciencesection(2)' onchange='modcheck(this)' type='checkbox' value='phys23'> PHYSICS 23</td>
                 <td width='140'><input name='sciencesection(2)' onchange='modcheck(this)' type='checkbox' value='phys43'> PHYSICS 43</td>
                 <td width='140'><input name='sciencesection(2)' onchange='modcheck(this)' type='checkbox' value='phys63'> PHYSICS 63</td>
-                <td width='140'><input name='sciencesection(2)'' onchange='modcheck(this)' type='checkbox' value='physap2'> PHYSICS 81</td>
+                <td width='140'><input name='sciencesection(2)'' onchange='modcheck(this)' type='checkbox' value='phys81'> PHYSICS 81</td>
               </tr>
               <tr>
                 <td>&nbsp;</td>
@@ -3433,7 +3433,7 @@
   </table>
   <p></p>
 <!--TODO: The MSCS program sheet already has this functionality but basically if you select an actual class its unit count gets added to this count thing below-->
-  <p><span id="req(foundationscount)" style="font-variant:small-caps;font-weight:bold;color:black">Foundation units applied to MSCS (max 10):</span> <input disabled="true" id="totalunits(foundations)" size='2' style="font-weight:bold;font-size:18;color:black" type="text" value="0"></p>
+  <p><br><span>Foundation units applied to MSCS (max 10):</span> <input disabled="true" id="totalunits(foundations)" size='2' style="font-weight:bold;font-size:18;color:black" type="text" value="0"></p>
 </fieldset>
 </div>
 </div>
@@ -3507,7 +3507,7 @@ provided below.</p>
     </tbody></table>
 
 <!--TODO: The MSCS program sheet already has this functionality but basically if you select an actual class its unit count gets added to this count thing below-->
-  <p><span id="req(sigimpcount)" style="font-variant:small-caps;font-weight:bold;color:black">Significant implementation units applied to MSCS:</span> <input disabled="true" id="totalunits(sigimp)" size='2' style="font-weight:bold;font-size:18;color:black" type="text" value="0">Note: Units for courses used to satisfy the breadth or depth requirements are counted there.</p>
+  <p><br><span>Significant implementation units applied to MSCS:</span> <input disabled="true" id="totalunits(sigimp)" size='2' style="font-weight:bold;font-size:18;color:black" type="text" value="0">Note: Units for courses used to satisfy the breadth or depth requirements are counted there.</p>
 </fieldset>
 </div>
 </div>
@@ -3522,7 +3522,7 @@ provided below.</p>
   <div>
     <p id="req(breadth)" style="color:red">Select three courses according to the following requirements:</p>
     <ul>
-      <li id="req(breadth)" style="color:red">Each course must be chosen from a different Breadth area (a), (b), (c), or (d).</li>
+      <li>Each course must be chosen from a different Breadth area (a), (b), (c), or (d).</li>
       <li>Breadth courses may not be waived, must be taken for at least 3 units each, and must be completed for a letter grade.</li>
       <li><b>Letter grades only.*</b></li>
     </ul>
@@ -3693,7 +3693,7 @@ provided below.</p>
   </table>
   <p></p>
 <!--TODO: The MSCS program sheet already has this functionality but basically if you select an actual class its unit count gets added to this count thing below-->
-<p><span id="req(breadthcount)" style="font-variant:small-caps;font-weight:bold;color:black">Breadth units applied to MSCS:</span> <input disabled="true" id="totalunits(breadth)" size='2' style="font-weight:bold;font-size:18;color:black" type="text" value="0"> Note: Units for courses used to satisfy the depth requirement are counted there.</p>
+<p><br><span>Breadth units applied to MSCS:</span> <input disabled="true" id="totalunits(breadth)" size='2' style="font-weight:bold;font-size:18;color:black" type="text" value="0"> Note: Units for courses used to satisfy the depth requirement are counted there.</p>
 </fieldset>
 </div>
 </div>
@@ -3717,7 +3717,7 @@ provided below.</p>
       </ul>
   </div>
   <p></p>
-  <span id="req(depth1)" style="color:red">(a) All of the following:</span>
+  <span id="req(deptha)" style="color:red">(a) All of the following:</span>
   <!--TODO: these must both be selected-->
   <table>
     <tr>
@@ -3726,7 +3726,7 @@ provided below.</p>
     </tr>
   </table>
   <br>
-  <span id="req(depth2)" style="color:red">(b) Select enough courses from the following to reach 21 total depth units applied to the MSCS:</span>
+  <span id="req(depthb)" style="color:red">(b) Select enough courses from the following to reach 21 total depth units applied to the MSCS:</span>
   <table>
     <tr>
       <td width='140'><input name='depthsection(2)' onchange='modcheck(this)' type='checkbox' value='cs151'> CS 151</td>
@@ -3783,7 +3783,7 @@ provided below.</p>
   
 
 <!--TODO: The MSCS program sheet already has this functionality but basically if you select an actual class its unit count gets added to this count thing below-->
-  <p><span id="req(depthcount)" style="font-variant:small-caps;font-weight:bold;color:black">Depth units applied to MSCS:</span> <input disabled="true" id="totalunits(depth)" size='2' style="font-weight:bold;font-size:18;color:black" type="text" value="0"></p>
+  <p><br><span>Depth units applied to MSCS:</span> <input disabled="true" id="totalunits(msdepth)" size='2' style="font-weight:bold;font-size:18;color:black" type="text" value="0"></p>
 </fieldset>
 </div>
 </div>
@@ -3807,7 +3807,7 @@ provided below.</p>
       <p><b>Enter details of elective courses in the course list at the end of the worksheet.</b></p>
 
     <!--TODO: The MSCS program sheet already has this functionality but if you put an elective in the list at the bottom its unit count gets added to this count thing below-->
-      <p><span id="req(electivecount)" style="font-variant:small-caps;font-weight:bold;color:black">Elective units applied to MSCS:</span> <input disabled="true" id="totalunits(electives)" size='2' style="font-weight:bold;font-size:18;color:black" type="text" value="0"></p>
+      <p><br><span>Elective units applied to MSCS:</span> <input disabled="true" id="totalunits(electives)" size='2' style="font-weight:bold;font-size:18;color:black" type="text" value="0"></p>
     </fieldset>
   </div>
 </div>
@@ -3824,7 +3824,7 @@ provided below.</p>
       </div>
 
     <!--TODO: total units count (buggy in MSCS sheet: fix)-->
-      <p><span id="req(msc)" style="font-variant:small-caps;font-weight:bold;color:black">Total units applied to MSCS:</span> <input disabled="true" id="totalunits(allunits)" size='2' style="font-weight:bold;font-size:18;color:black" type="text" value="0"></p>
+      <p><span>Total units applied to MSCS:</span> <input disabled="true" id="totalunits(allunits)" size='2' style="font-weight:bold;font-size:18;color:black" type="text" value="0"></p>
     </fieldset>
   </div>
 </div>
@@ -7222,11 +7222,11 @@ provided below.</p>
 
 <textarea id="lambda" style="display:none;" type="text/hrf">
 load
-josen(mathsection(1),mathap)
-josen(mathsection(2),cs103)
-josen(mathsection(2),cs109)
-josen(sciencesection(1),physap1)
-josen(sciencesection(2),physap2)
+%josen(mathsection(1),mathap)
+%josen(mathsection(2),cs103)
+%josen(mathsection(2),cs109)
+%josen(sciencesection(1),physap1)
+%josen(sciencesection(2),physap2)
 josen(sciencesection(3),cee63)
 josen(fundamentalsection(1),cs106b)
 josen(fundamentalsection(2),engr40m)
@@ -7301,14 +7301,11 @@ requirement(foundationscount) % used to count foundations units and have max of 
 requirement(sigimp) % must have class for significant implementation within sigimpsection
 % TODO: sigimp CAN ALSO be used to satisfy breadth, depth, elective!
 
-requirement(breadth1) % must have three courses
-requirement(breadth2) % must be from different areas
-requirement(breadth3) % all courses must be at least 3 units
+requirement(breadth1) % must have three courses (different areas & 3 units already programmed into sheet)
 % TODO: breadth CAN ALSO be used to satisfy sigimp, depth, elective!
 
-requirement(depth1) % cs 154 & cs 261
-requirement(depth2) % at least 21 units of courses from depthsection(2)
-requirement(depth3) % max 6 units of cs399 independent study
+requirement(deptha) % cs 154 & cs 261
+requirement(depthb) % at least 21 units of courses from depthsection(2)
 % TODO: MULTIPLE CS 359, 369, AND 468 COURSES MAY BE TAKEN SO LONG AS THEY ARE ON DIFF TOPICS - MIGHT NEED TO MAKE DROPDOWN FOR THESE
 
 % TODO: MAY NEED TO REDEFINE ELECTIVES LATER
@@ -7337,6 +7334,11 @@ satisfied(math1) :-
   geq(TOTAL,10)
 
 satisfied(math1) :- 
+  josen(mathsection(1),mathap) &
+  units(mathap,TOTAL) & 
+  geq(TOTAL,10)
+
+satisfied(math1) :- 
   josen(mathsection(1),math41) & 
   josen(mathsection(1),math42) &
   units(math41,X1) & 
@@ -7344,10 +7346,7 @@ satisfied(math1) :-
   plus(X1,X2,TOTAL) &
   geq(TOTAL,10)
 
-satisfied(math1) :- 
-  josen(mathsection(1),mathap) &
-  units(mathap,TOTAL) & 
-  geq(TOTAL,10)
+
 
 satisfied(math2) :-
   josen(mathsection(2),cs103) & 
@@ -7369,8 +7368,7 @@ satisfied(science1) :- josen(sciencesection(1),physap1)
 
 satisfied(science2) :- josen(sciencesection(2),phys23)
 satisfied(science2) :- josen(sciencesection(2),phys43)
-satisfied(science2) :- josen(sciencesection(2),phys63)
-satisfied(science2) :- josen(sciencesection(2),phys81)
+satisfied(science2) :- josen(sciencesection(2),phys63) & josen(sciencesection(2),phys81)
 % satisfied(science2) :- countofall(COURSE, josen(mathsection(3),COURSE), N) & geq(N,2)
 
 satisfied(science3) :-
@@ -7462,6 +7460,7 @@ units(C,N) :-
   countofall(courseunits(C,N),courseunits(C,N),0) &
   true(course(C,D,Num,T,N),catalog)
 
+%%%%%% Unit Counts for BSCS %%%%%%
 mathunits(TOTALMATH) :- 
   setofall([UNITS,COURSE,X], josen(mathsection(X),COURSE) & units(COURSE,UNITS), S) &
   map(first,S,L) &
@@ -7516,6 +7515,13 @@ seniorunits(TOTAL) :-
   setofall([UNITS,COURSE], josen(senior(1),COURSE) & units(COURSE,UNITS), S) &
   map(first,S,L) &
   sum(L,TOTAL)
+
+%%%%%% Unit Counts for MSCS %%%%%%
+foundationunits(TOTALFOUNDATIONS) :- 
+  setofall([UNITS,COURSE,X], josen(foundationssection(X),COURSE) & units(COURSE,UNITS), S) &
+  map(first,S,L) &
+  sum(L,TOTAL) & 
+  evaluate(min(TOTAL,10),TOTALFOUNDATIONS)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Satisfiers for this program sheet
@@ -8127,8 +8133,20 @@ mutexmath(2,engr108)
 select(sciencesection(1),X) ::
   josen(sciencesection(1),Y) ==> ~josen(sciencesection(1),Y)
 
-select(sciencesection(2),X) ::
-  josen(sciencesection(2),Y) ==> ~josen(sciencesection(2),Y)
+  select(sciencesection(2),X) ::
+  math(M,X) & math(N,Y) & math(O,Z) & distinct(M,N) & distinct(N,O) ==> ~josen(sciencesection(2),Y)
+  %original
+%select(sciencesection(2),X) ::
+ % josen(sciencesection(2),Y) ==> ~josen(sciencesection(2),Y)
+
+ select(sciencesection(2),X) ::
+ mutexscience(N,X) & mutexscience(N,Y) ==> ~josen(sciencesection(2),Y)
+
+mutexscience(1,phys23)
+mutexscience(1,phys43)
+mutexscience(2,phys63)
+mutexscience(3,phys81)
+
 
 select(sciencesection(3),X) ::
   josen(sciencesection(3),Y) ==> ~josen(sciencesection(3),Y)
@@ -8250,8 +8268,10 @@ value(totalunits(cs), TOTAL) :- csunits(TOTAL)
 
 value(totalunits(foundations), TOTAL) :- foundationunits(TOTAL)
 value(totalunits(sigimp), TOTAL) :- sigimpunits(TOTAL)
-value(totalunits(electives), TOTAL) :- electiveunits(TOTAL)
-
+value(totalunits(breadth), TOTAL) :- breadthunits(TOTAL)
+value(totalunits(msdepth), TOTAL) :- msdepthunits(TOTAL)
+value(totalunits(electives), TOTAL) :- mselectiveunits(TOTAL)
+value(totalunits(allunitsms), TOTAL) :- mscsunits(TOTAL)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -8318,6 +8338,9 @@ style(consultapchart, color, "#0000ff") :- consultapchart
 style(consultapchart, color, "888888") :- ~consultapchart
 
 consultapchart :- josen(mathsection(1),mathap)
+
+style(row(X), display, "") :- josen(S,X)
+style(row(X), display, "none") :- courses(Section,X) & ~holds(X)
 
 style(twoundergrad, display, "") :- josen(sigsection(1),twoundergradbox)
 style(twoundergrad, display, "none") :- ~josen(sigsection(1),twoundergradbox)
