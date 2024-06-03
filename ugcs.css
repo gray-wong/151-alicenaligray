@@ -1,0 +1,55 @@
+.show {
+  /* display: inline-block; */
+  padding: 0px;
+  margin: 0px;
+}
+.show-body {
+  margin-top: 10px;
+  padding: 10px;
+  padding-bottom: 0px;
+}
+.card {
+  margin-bottom: 20px;
+}
+p
+ {margin:0px;
+  padding:0px;
+/* display: inline-block; */
+}
+    select
+     {margin: 0px;}
+    table, input, select
+     {font-size: 13px!important;}
+    input[type='text'], select
+     {outline: none;}
+    tr[id^='row'] > td
+     {border: 1px solid black;}
+    .notes {display:none}
+    [id^='row\('] > td:nth-child(1),
+	[id^='row\('][id*=',appp'] > td:nth-child(2),
+	[id^='row\('][id*=',appp'] > td:nth-child(3),
+	[id^='units\('],
+	[id^='totalunits\('],
+	[id^='dept\(']
+	[id^='number\('],
+	[id^='title\(']
+	{padding: 0px 0px 0px 5px;}
+    @media print 
+     {table, input, select
+       {font-size: 11px!important;}
+      [id^='choose']
+       {display: none;}
+      .notes {display:inline}
+      .noprint {display:none}
+      select
+       {-moz-appearance: none;
+        -webkit-appearance: none;
+        border: none!important;
+        background-color: transparent!important;}}
+    input, select
+     {margin: 0px;
+    	padding-top: 0px;
+    	padding-bottom: 0px;}
+    fieldset {border-color:#B0C4DE;padding:5px;margin-top:10px}
+    fieldset input, fieldset select
+     {margin: 3px;}
