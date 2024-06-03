@@ -3519,11 +3519,19 @@ provided below.</p>
   <div class="card-body">
 <fieldset class='noprint' style="width:100%;border-collapse:collapse;font-family:arial">
   <legend><b>Breadth Requirement</b></legend>
-  <div>Three courses, with each course chosen from a different Breadth area (a), (b), (c), or (d). Breadth courses may not be waived, must be taken for at least 3 units each, and must be completed for a letter grade. Each of the three Breadth courses must be from different areas. Note that these courses may also be used to satisfy some other requirement (i.e. Depth or Elective). <b>Letter grades only.*</b></div>
+  <div>
+    <p id="req(breadth)" style="color:red">Select three courses according to the following requirements:</p>
+    <ul>
+      <li id="req(breadth)" style="color:red">Each course must be chosen from a different Breadth area (a), (b), (c), or (d).</li>
+      <li>Breadth courses may not be waived, must be taken for at least 3 units each, and must be completed for a letter grade.</li>
+      <li><b>Letter grades only.*</b></li>
+    </ul>
+    <p>Note that these courses may also be used to satisfy some other requirement (i.e. Depth or Elective).</p>
+  </div>
 
 <!--TODO: make sure only one check box in each of these sections can be selected-->
 <p></p>
-  <span id="req(breadth1)" style="color:red">(a) Mathematical and Theoretical Foundations:</span>
+  <span id="req(breadth1)" style="color:black">(a) Mathematical and Theoretical Foundations:</span>
   <table>
     <tr>
       <td width='140'><input name='breadthsection(1)' onchange='modcheck(this)' type='checkbox' value='cs154'> CS 154</td>
@@ -3541,7 +3549,7 @@ provided below.</p>
   </table>
   <br/>
 
-  <span id="req(breadth2)" style="color:red">(b) Computer Systems:</span>
+  <span id="req(breadth2)" style="color:black">(b) Computer Systems:</span>
 <table>
   <tr>
     <table>
@@ -3569,7 +3577,7 @@ provided below.</p>
     </table>
   <br/>
 
-  <span id="req(breadth3)" style="color:red">(c) Applications:</span>
+  <span id="req(breadth3)" style="color:black">(c) Applications:</span>
   <table>
     <tr>
       <td width='140'><input name='breadthsection(3)' onchange='modcheck(this)' type='checkbox' value='cs145'> CS 145</td>
@@ -3628,7 +3636,7 @@ provided below.</p>
   </table>
   <br/>
 
-  <span id="req(breadth4)" style="color:red">(d) Computing and Society:</span>
+  <span id="req(breadth4)" style="color:black">(d) Computing and Society:</span>
   <table>
     <tr>
       <td width='140'><input name='breadthsection(4)' onchange='modcheck(this)' type='checkbox' value='amstud133'> AmStud 133</td>
@@ -7293,18 +7301,20 @@ requirement(foundationscount) % used to count foundations units and have max of 
 requirement(sigimp) % must have class for significant implementation within sigimpsection
 % TODO: sigimp CAN ALSO be used to satisfy breadth, depth, elective!
 
-requirement(breadth1) % three courses from either breadthsection(1), breadthsection(2), breadthsection(3), or breadthsection(4) and all at least 3 units
-requirement(breadth2) % all three courses must be from different breadthsections
+requirement(breadth1) % must have three courses
+requirement(breadth2) % must be from different areas
+requirement(breadth3) % all courses must be at least 3 units
 % TODO: breadth CAN ALSO be used to satisfy sigimp, depth, elective!
 
 requirement(depth1) % cs 154 & cs 261
 requirement(depth2) % at least 21 units of courses from depthsection(2)
 requirement(depth3) % max 6 units of cs399 independent study
-requirement(depth4) % advisor approval on courses 393, 395, 399 IF SELECTED
-% TODO: MULTIPLE CS 359, 369, AND 468 COURSES MAY BE TAKEN SO LONG AS THEY ARE ON DIFF TOPICS
+% TODO: MULTIPLE CS 359, 369, AND 468 COURSES MAY BE TAKEN SO LONG AS THEY ARE ON DIFF TOPICS - MIGHT NEED TO MAKE DROPDOWN FOR THESE
 
+% TODO: MAY NEED TO REDEFINE ELECTIVES LATER
 requirement(electives1) % maximum three units of 1-2 unit seminars counted in electivessection(2), which is for seminars only
-requirement(electives2) % all chosen classes in electivessection(3), which are NOT seminars, must be taken for at least 3 unitsrequirement(electives3) % cannot choose courses 111 or below, 161a, 196, 198, 390a/b/c
+requirement(electives2) % all chosen classes in electivessection(3), which are NOT seminars, must be taken for at least 3 units
+requirement(electives3) % cannot choose courses 111 or below, 161a, 196, 198, 390a/b/c
 requirement(electives4) % any chosen non-cs course must be technical, above 100, and approved by addvisor
 requirement(electives5) % cs 129 cannot be counted towards mscs degree if cs 229 is being counted towards any bs or ms req
 
@@ -7354,14 +7364,14 @@ satisfied(math4) :- mathunits(TOTAL) & geq(TOTAL,26)
 %%%%%% Science %%%%%%
 satisfied(science1) :- josen(sciencesection(1),phys21)
 satisfied(science1) :- josen(sciencesection(1),phys41)
-satisfied(science1) :- josen(sciencesection(1),phys41e)
 satisfied(science1) :- josen(sciencesection(1),phys61)
 satisfied(science1) :- josen(sciencesection(1),physap1)
 
 satisfied(science2) :- josen(sciencesection(2),phys23)
 satisfied(science2) :- josen(sciencesection(2),phys43)
 satisfied(science2) :- josen(sciencesection(2),phys63)
-satisfied(science2) :- josen(sciencesection(2),physap2)
+satisfied(science2) :- josen(sciencesection(2),phys81)
+% satisfied(science2) :- countofall(COURSE, josen(mathsection(3),COURSE), N) & geq(N,2)
 
 satisfied(science3) :-
   josen(sciencesection(3),C) &
@@ -7441,7 +7451,7 @@ satisfied(foundations5) :- josen(foundationssection(5),cs111)
 satisfied(foundations5) :- josen(foundationssection(5),ug5) & (josen(core(2),cs110)|josen(core(2),cs111))
 satisfied(foundations5) :- josen(foundationssection(5),coursesub5)
 
-% satisfied(foundations6) :-
+% satisfied(foundations6) :- 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% definitions
@@ -8198,6 +8208,20 @@ select(sigsection(1),X) ::
   josen(sigsection(1),Y) ==> ~josen(sigsection(1),Y)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+select(breadthsection(1),X) ::
+  josen(breadthsection(1),Y) ==> ~josen(breadthsection(1),Y)
+
+select(breadthsection(2),X) ::
+  josen(breadthsection(2),Y) ==> ~josen(breadthsection(2),Y)
+
+select(breadthsection(3),X) ::
+  josen(breadthsection(3),Y) ==> ~josen(breadthsection(3),Y)
+
+select(breadthsection(4),X) ::
+  josen(breadthsection(4),Y) ==> ~josen(breadthsection(4),Y)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Styling
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -8224,7 +8248,10 @@ value(totalunits(elective), TOTAL) :- electiveunits(TOTAL)
 value(totalunits(depth), TOTAL) :- depthunits(TOTAL)
 value(totalunits(cs), TOTAL) :- csunits(TOTAL)
 
-%value()
+value(totalunits(foundations), TOTAL) :- foundationunits(TOTAL)
+value(totalunits(sigimp), TOTAL) :- sigimpunits(TOTAL)
+value(totalunits(electives), TOTAL) :- electiveunits(TOTAL)
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
