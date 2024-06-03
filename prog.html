@@ -6936,23 +6936,13 @@ units(C,N) :-
   true(course(C,D,Num,T,N),catalog)
 
 
-isundergrad(C) :- josen(mathsection(1), C)
-isundergrad(C) :- josen(mathsection(2), C)
-isundergrad(C) :- josen(mathsection(3), C)
-isundergrad(C) :- josen(sciencesection(1), C)
-isundergrad(C) :- josen(sciencesection(2), C)
-isundergrad(C) :- josen(sciencesection(3), C)
-isundergrad(C) :- josen(tissection(1), C)
-isundergrad(C) :- josen(fundamentalsection(1), C)
-isundergrad(C) :- josen(fundamentalsection(2), C)
-isundergrad(C) :- josen(core(1), C)
-isundergrad(C) :- josen(core(2), C)
-isundergrad(C) :- josen(track(1), C)
-isundergrad(C) :- josen(track(2), C)
-isundergrad(C) :- josen(track(3), C)
-isundergrad(C) :- josen(track(4), C)
-isundergrad(C) :- josen(track(5), C)
-isundergrad(C) :- josen(elective(1), C)
+isundergrad(C) :- josen(mathsection(X), C)
+isundergrad(C) :- josen(sciencesection(X), C)
+isundergrad(C) :- josen(tissection(X), C)
+isundergrad(C) :- josen(fundamentalsection(X), C)
+isundergrad(C) :- josen(core(X), C)
+isundergrad(C) :- josen(track(X), C)
+isundergrad(C) :- josen(elective(X), C)
 
 %%%%%% Unit Counts for BSCS %%%%%%
 mathunits(TOTALMATH) :- 
@@ -7841,8 +7831,9 @@ style(consultapchart, color, "888888") :- ~consultapchart
 
 consultapchart :- josen(mathsection(1),mathap)
 
-style(row(X), display, "") :- josen(S,X)
+style(row(X), display, "") :- josen(S,X) &  & ~isundergrad(X)
 style(row(X), display, "none") :- courses(Section,X) & ~holds(X)
+style(row(X), display, "none") :- isundergrad(X)
 
 style(twoundergrad, display, "") :- josen(sigsection(1),twoundergradbox)
 style(twoundergrad, display, "none") :- ~josen(sigsection(1),twoundergradbox)
