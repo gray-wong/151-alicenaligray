@@ -7017,7 +7017,7 @@ foundationunits(TOTALFOUNDATIONS) :-
 sigimpunits(TOTALSIGIMP) :- 
   setofall([UNITS,COURSE,X], josen(sigsection(X),COURSE) & units(COURSE,UNITS), S) &
   map(first,S,L) &
-  sum(L,TOTAL) & % TODO: NOT RIGHT WILL FIX - SUBTRACTNG WRONG THI
+  sum(L,TOTAL) & % TODO: NOT RIGHT WILL FIX - SUBTRACTNG WRONG THINGS I THINK
   setofall([UNITS1,COURSE1,X1], josen(breadthsection(X1),COURSE1) & same(COURSE,COURSE1) & units(COURSE1,UNITS1), S1) &
   map(first,S1,L1) &
   sum(L1,TOTAL1)
