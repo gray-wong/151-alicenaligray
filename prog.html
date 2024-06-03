@@ -622,7 +622,7 @@
     </tr>
   </table>
 <!-- TODO: add electives/recalculate core4? -->
-  <p><span id="req(core4)" style="font-variant:small-caps;font-weight:bold;color:red">Core units (minimum 25):</span> <input disabled="true" id="totalunits(core)" size='2' style="font-weight:bold;font-size:18;color:black" type="text" value="0"></p>
+  <p><span id="req(track7)" style="font-variant:small-caps;font-weight:bold;color:red">Core units (minimum 25):</span> <input disabled="true" id="totalunits(track)" size='2' style="font-weight:bold;font-size:18;color:black" type="text" value="0"></p>
 </fieldset>
 </div></div>
 <!--=========================================================================-->
@@ -3855,7 +3855,7 @@ provided below.</p>
 <!--=========================================================================-->
 
 <fieldset style="break-before:page">
-  <legend style="font-variant:small-caps">Course List</legend>
+  <legend style="font-variant:small-caps">Grad Course List</legend>
   <center>
 <table cellspacing="4">
   <!--=== COURSES START HERE ===-->
@@ -6685,26 +6685,26 @@ provided below.</p>
 
 
 <textarea id="lambda" style="display:none;" type="text/hrf">
-load
+%load
 %josen(mathsection(1),mathap)
 %josen(mathsection(2),cs103)
 %josen(mathsection(2),cs109)
 %josen(sciencesection(1),physap1)
 %josen(sciencesection(2),physap2)
-josen(sciencesection(3),cee63)
+%josen(sciencesection(3),cee63)
 %josen(fundamentalsection(1),cs106b)
 %josen(fundamentalsection(2),engr40m)
-josen(core(1),cs107)
-josen(core(2),cs110)
-josen(core(3),cs161)
-josen(track(1),cs140)
-josen(track(2),cs143)
-josen(track(3),cs155)
-josen(track(3),cs144)
-josen(elective(1),cs142)
-josen(elective(1),cs124)
-josen(elective(1),cs108)
-josen(senior(1),cs194w)
+%josen(core(1),cs107)
+%josen(core(2),cs110)
+%josen(core(3),cs161)
+%josen(track(1),cs140)
+%josen(track(2),cs143)
+%josen(track(3),cs155)
+%josen(track(3),cs144)
+%josen(elective(1),cs142)
+%josen(elective(1),cs124)
+%josen(elective(1),cs108)
+%josen(senior(1),cs194w)
 </textarea>
 
 <!--=======================================================================-->
@@ -6745,6 +6745,7 @@ requirement(track3) % one additional course from a course in track(3)
 requirement(track4) % one course from a course in track(4)
 requirement(track5) % one course from a course in track(5)
 requirement(elective1) % at least two additional electives
+requirement(track7) % one course from a course in track(5)
 
 requirement(depth1) % take enough courses to get to 25 units total for depth (includes tracks i think)
 
@@ -6862,13 +6863,17 @@ satisfied(core3) :- josen(core(3),cs161) & units(cs161,5)
 satisfied(core4) :- coreunits(TOTAL) & geq(TOTAL,15)
 
 %%%%%% Track %%%%%%
-%satisfied(track1) :- josen(track(1),COURSE)
 satisfied(track1) :- josen(track(1),cs154)
 satisfied(track2) :- countofall(COURSE, josen(track(2),COURSE),N) & geq(N,2)
 satisfied(track3) :- josen(track(3),COURSE)
 satisfied(track4) :- josen(track(4),COURSE)
 satisfied(track5) :- josen(track(5),COURSE)
 satisfied(elective1) :- countofall(COURSE, josen(elective(1),COURSE),N) & geq(N,2)
+%satisfied(track7) :- plus(trackunits(TOTAL), electiveunits(TOTAL)) & geq(TOTAL,25)
+%satisfied(track7) :- evaluate(plus(trackunits(TOTAL), electiveunits(TOTAL2)),N) & geq(N,25)
+%satisfied(track7) :- countofall(COURSE, josen(track(2),COURSE),N) & geq(N,2)
+satisfied(track7) :- geq(totalunits(track),5)
+%satisfied(track7) :- josen(track(1),COURSE)
 
 
 %%%%%% Depth %%%%%%
@@ -6943,6 +6948,12 @@ isundergrad(C) :- josen(fundamentalsection(X), C)
 isundergrad(C) :- josen(core(X), C)
 isundergrad(C) :- josen(track(X), C)
 isundergrad(C) :- josen(elective(X), C)
+isundergrad(C) :- josen(senior(X), C)
+
+isgrad(C) :- josen(foundationssection(X), C)
+isgrad(C) :- josen(sigsection(X), C)
+isgrad(C) :- josen(breadthsection(X), C)
+isgrad(C) :- josen(depthsection(X), C)
 
 %%%%%% Unit Counts for BSCS %%%%%%
 mathunits(TOTALMATH) :- 
@@ -7009,6 +7020,7 @@ foundationunits(TOTALFOUNDATIONS) :-
 
 sigimpunits(TOTALSIGIMP) :- 
   setofall([UNITS,COURSE,X], josen(sigsection(X),COURSE) &
+  ~josen(breadthsection(X),COURSE) & 
   units(COURSE,UNITS), S) &
   map(first,S,L) &
   sum(L,TOTALSIGIMP)
@@ -7597,7 +7609,10 @@ holds(S,X) :- josen(S,X)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 select(SECTION,COURSE) ::
-  josen(ANOTHERSECTION,COURSE) ==> ~josen(ANOTHERSECTION,COURSE)
+  josen(ANOTHERSECTION,COURSE) &
+  ~member(SECTION, [sigsection(N), breadthsection(N), depthsection(N)]) &
+  ~member(ANOTHERSECTION, [sigsection(N), breadthsection(N), depthsection(N)])
+  ==> ~josen(ANOTHERSECTION,COURSE)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -7687,8 +7702,6 @@ select(track(3),X) :: josen(track(3),Y) ==> ~josen(track(3),Y)
 select(track(4),X) :: josen(track(4),Y) ==> ~josen(track(4),Y)
 
 select(track(5),X) :: josen(track(5),Y) ==> ~josen(track(5),Y)
-
-select(elective(1),X) :: josen(elective(1),Y) ==> ~josen(elective(1),Y)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -7831,9 +7844,8 @@ style(consultapchart, color, "888888") :- ~consultapchart
 
 consultapchart :- josen(mathsection(1),mathap)
 
-style(row(X), display, "") :- josen(S,X) % & ~isundergrad(X)
-style(row(X), display, "none") :- courses(Section,X) & ~holds(X)
-% style(row(X), display, "none") :- isundergrad(X)
+style(row(X), display, "") :- josen(S,X) & isgrad(X)
+%style(row(X), display, "none") :- courses(S,X) & ~josen(S,X)
 
 style(twoundergrad, display, "") :- josen(sigsection(1),twoundergradbox)
 style(twoundergrad, display, "none") :- ~josen(sigsection(1),twoundergradbox)
