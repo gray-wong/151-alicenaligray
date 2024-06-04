@@ -3850,6 +3850,7 @@ provided below.</p>
           <li>At least 36 units submitted for the MSCS degree, including all courses taken for breadth and depth, must be taken for a letter grade. Exceptions are made for courses taken Spring 2019-20 and Autumn 2020-21 through Summer 2020-21.</li>
           <li>The average grade in the courses submitted for the MSCS must be at least a B (3.0 in Stanford's GPA scale).</li>
           <li id="req(nooverlap)" style="color:black">Units previously applied toward BS requirements may not be counted toward the MSCS.</li>
+          <!--maybe just take out this requirement styling? idek how we would check that-->
         </ul>
       </div>
       <p>*All courses taken Spring 19-20 and Fall through Summer 20-21 for a CR or S grade satisfy requirements as if taken for a letter grade.</p>
@@ -3866,6 +3867,11 @@ provided below.</p>
 <table cellspacing="4">
   <!--=== COURSES START HERE ===-->
   <tbody>
+    <tr>
+      <td><b>Course Identifier</b></td>
+      <td><b>Course Title</b></td>
+      <td><b>Units</b></td>
+    </tr>
     <tr id='row(aa252)' style='display:none'>
       <td>AA 252</td>
       <td>Techniques of Failure Analysis</td>
@@ -6560,8 +6566,8 @@ provided below.</p>
 </tbody></table>
   </center>
   <br>
-    <p id="req(breadthunits)" style="color: blue;">Breadth courses must be taken for at least 3 units</p>
-    <p id="req(depthunits)" style="color: blue;">Depth courses must be taken for at least 3 units</p><br>
+    <p id="req(breadthunits)" style="color: black;">Breadth courses must be taken for at least 3 units</p>
+    <p id="req(msdepthunits)" style="color: black;">Depth courses must be taken for at least 3 units</p><br>
 </fieldset>
 
 <!--=======================================================================-->
@@ -6928,6 +6934,16 @@ satisfied(sigimp) :- josen(sigsection(1),C)
 
 satisfied(deptha) :- josen(depthsection(1),cs154) & josen(depthsection(1), cs261)
 % satisfied(depthb) :- 
+
+satisfied(breadth) :- satisfied(breadth1) & satisfied(breadth2) & satisfied(breadth3)
+satisfied(breadth) :- satisfied(breadth1) & satisfied(breadth2) & satisfied(breadth4)
+satisfied(breadth) :- satisfied(breadth1) & satisfied(breadth3) & satisfied(breadth4)
+satisfied(breadth) :- satisfied(breadth2) & satisfied(breadth3) & satisfied(breadth4)
+
+satisfied(breadth1) :- josen(breadthsection(1), C) & ~isundergrad(C)
+satisfied(breadth2) :- josen(breadthsection(2), C) & ~isundergrad(C)
+satisfied(breadth3) :- josen(breadthsection(3), C) & ~isundergrad(C)
+satisfied(breadth4) :- josen(breadthsection(4), C) & ~isundergrad(C)
 
 
 % these two are for the course list
