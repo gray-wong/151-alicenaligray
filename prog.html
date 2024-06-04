@@ -6930,11 +6930,10 @@ satisfied(foundations5) :- josen(foundationssection(5),cs111)
 satisfied(foundations5) :- josen(foundationssection(5),ug5) & (josen(core(2),cs110)|josen(core(2),cs111))
 satisfied(foundations5) :- josen(foundationssection(5),coursesub5)
 
+%%%%%% Significant Implementation %%%%%%
 satisfied(sigimp) :- josen(sigsection(1),C)
 
-satisfied(deptha) :- josen(depthsection(1),cs154) & josen(depthsection(1), cs261)
-% satisfied(depthb) :- 
-
+%%%%%% Breadth %%%%%%
 satisfied(breadth) :- satisfied(breadth1) & satisfied(breadth2) & satisfied(breadth3)
 satisfied(breadth) :- satisfied(breadth1) & satisfied(breadth2) & satisfied(breadth4)
 satisfied(breadth) :- satisfied(breadth1) & satisfied(breadth3) & satisfied(breadth4)
@@ -6945,14 +6944,16 @@ satisfied(breadth2) :- josen(breadthsection(2), C) & ~isundergrad(C)
 satisfied(breadth3) :- josen(breadthsection(3), C) & ~isundergrad(C)
 satisfied(breadth4) :- josen(breadthsection(4), C) & ~isundergrad(C)
 
+%%%%%% Depth %%%%%%
+satisfied(deptha) :- josen(depthsection(1),cs154) & josen(depthsection(1), cs261)
+satisfied(depthb) :- msdepthunits(TOTAL) & geq(TOTAL, 21)
 
+%%%%%% Course List %%%%%%
 % these two are for the course list
 satisfied(breadthunits) :- 
   evaluate(countofall(C, josen(breadthsection(X),C) & units(C,U) & leq(U,2)), 0)
 satisfied(msdepthunits) :- 
   evaluate(countofall(C, josen(depthsection(X),C) & units(C,U) & leq(U,2)), 0)
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% definitions
@@ -6962,7 +6963,6 @@ units(C,N) :- courseunits(C,N)
 units(C,N) :-
   countofall(courseunits(C,N),courseunits(C,N),0) &
   true(course(C,D,Num,T,N),catalog)
-
 
 isundergrad(C) :- josen(mathsection(X), C)
 isundergrad(C) :- josen(sciencesection(X), C)
@@ -7035,7 +7035,19 @@ seniorunits(TOTAL) :-
   sum(L,TOTAL)
 
 %%%%%% Unit Counts for MSCS %%%%%%
+getugcourses(UGLIST) :-
+  setofall([UNITS,COURSE,X], josen(mathsection(X),COURSE) & units(COURSE,UNITS), S) & 
+  setofall([UNITS,COURSE,X], josen(sciencesection(X),COURSE) & units(COURSE,UNITS), S1) &
+  setofall([UNITS,COURSE,X], josen(tissection(X),COURSE) & units(COURSE,UNITS), S2) &
+  setofall([UNITS,COURSE,X], josen(fundamentalsection(X),COURSE) & units(COURSE,UNITS), S3) &
+  setofall([UNITS,COURSE,X], josen(core(X),COURSE) & units(COURSE,UNITS), S4) &
+  setofall([UNITS,COURSE,X], josen(track(X),COURSE) & units(COURSE,UNITS), S5) &
+  setofall([UNITS,COURSE,X], josen(elective(X),COURSE) & units(COURSE,UNITS), S6) &
+  setofall([UNITS,COURSE,X], josen(senior(X),COURSE) & units(COURSE,UNITS), S7) &
+  append(S,S1,S2,S3,S4,S5,S6,S7)
+
 foundationunits(TOTALFOUNDATIONS) :- 
+  % get chosen foundations classes
   setofall([UNITS,COURSE,X], josen(foundationssection(X),COURSE) & units(COURSE,UNITS), S) &
   map(first,S,L) &
   sum(L,TOTAL) & 
@@ -7068,7 +7080,7 @@ breadthunits(TOTALBREADTH) :-
   % getting chosen depth classes
   setofall([UNITS,COURSE,X1], josen(depthsection(X1),COURSE) & units(COURSE,UNITS), S1) &
   map(first,S1,L1) &
-  % find common classes between sigimp and breadth OR sigimp and depth
+  % find common classes between breadth and depth
   setofall([UNITS,COURSE,_], member([UNITS,COURSE,_],S) & member([UNITS,COURSE,_],S1), C) &
   map(first,C,L2) &
   sum(L2,TOTAL1) &
@@ -7607,7 +7619,7 @@ style(sendback,display,"") :-
 
 select(X,Y) :: functional(X) ==> val(X,Y)
 select(X,Y) :: functional(X) & val(X,Z) ==> ~val(X,Z)
-
+ 
 functional(name)
 functional(suid)
 functional(phone)
