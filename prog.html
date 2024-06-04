@@ -3830,7 +3830,7 @@ provided below.</p>
       </div>
 
     <!--TODO: total units count (buggy in MSCS sheet: fix)-->
-      <p><span>Total units applied to MSCS:</span> <input disabled="true" id="totalunits(allunits)" size='2' style="font-weight:bold;font-size:18;color:black" type="text" value="0"></p>
+      <p><span>Total units applied to MSCS:</span> <input disabled="true" id="totalunits(allunitsms)" size='2' style="font-weight:bold;font-size:18;color:black" type="text" value="0"></p>
     </fieldset>
   </div>
 </div>
@@ -7041,28 +7041,54 @@ foundationunits(TOTALFOUNDATIONS) :-
   sum(L,TOTAL) & 
   evaluate(min(TOTAL,10),TOTALFOUNDATIONS)
 
+% if the sigimp class is selected by breadth or depth then we don't count its units in sigimp
 sigimpunits(TOTALSIGIMP) :- 
+  % getting chosen sigimp class
   setofall([UNITS,COURSE,X], josen(sigsection(X),COURSE) & units(COURSE,UNITS), S) &
   map(first,S,L) &
-  sum(L,TOTAL) & % TODO: NOT RIGHT WILL FIX - SUBTRACTNG WRONG THINGS I THINK
-  setofall([UNITS1,COURSE1,X1], josen(breadthsection(X1),COURSE1) & same(COURSE,COURSE1) & units(COURSE1,UNITS1), S1) &
+  sum(L,TOTAL) &
+  % getting chosen breadth classes
+  setofall([UNITS,COURSE,X1], josen(breadthsection(X1),COURSE) & units(COURSE,UNITS), S1) &
   map(first,S1,L1) &
-  sum(L1,TOTAL1) &
-  minus(TOTAL,TOTAL1,TOTALSIGIMP)
-  % TODO: FUNCTIONALITY TO ENSURE THAT THE CLASS IS NOT SELECTED IN BREADTH OR DEPTH - if it is then don't count
+  % getting chosen depth classes 
+  setofall([UNITS,COURSE,X2], josen(depthsection(X2),COURSE) & units(COURSE,UNITS), S2) &
+  map(first,S2,L2) &
+  % find common classes between sigimp and breadth OR sigimp and depth
+  setofall([UNITS,COURSE,_], or(member([UNITS,COURSE,_],S) & member([UNITS,COURSE,_],S1),member([UNITS,COURSE,_],S) & member([UNITS,COURSE,_],S2)), C) &
+  map(first,C,L3) &
+  sum(L3,TOTAL1) &
+  minus(TOTAL,TOTAL1,TOTALSIGIMP).
 
+% if the breadth classes selected are in depth then we don't count its units in breadth
 breadthunits(TOTALBREADTH) :- 
+  % getting chosen breadth classes
   setofall([UNITS,COURSE,X], josen(breadthsection(X),COURSE) & units(COURSE,UNITS), S) &
   map(first,S,L) &
-  sum(L,TOTALBREADTH)
-  % TODO: FUNCTIONALITY TO ENSURE THAT THE CLASS IS NOT SELECTED IN DEPTH - if it is then don't count
+  sum(L,TOTAL) &
+  % getting chosen depth classes
+  setofall([UNITS,COURSE,X1], josen(depthsection(X1),COURSE) & units(COURSE,UNITS), S1) &
+  map(first,S1,L1) &
+  % find common classes between sigimp and breadth OR sigimp and depth
+  setofall([UNITS,COURSE,_], member([UNITS,COURSE,_],S) & member([UNITS,COURSE,_],S1), C) &
+  map(first,C,L2) &
+  sum(L2,TOTAL1) &
+  minus(TOTAL,TOTAL1,TOTALBREADTH).
 
 msdepthunits(TOTALDEPTH) :- 
   setofall([UNITS,COURSE,X], josen(depthsection(X),COURSE) & units(COURSE,UNITS), S) &
   map(first,S,L) &
   sum(L,TOTALDEPTH)
-  % TODO: FUNCTIONALITY TO ENSURE THAT THE CLASS IS NOT SELECTED IN BREADTH - if it is then don't count
 
+%mselectiveunits(TOTALELECTIVES) :- 
+
+mscsunits(TOTALMSCS) :- 
+  foundationunits(TOTAL1) &
+  sigimpunits(TOTAL2) &
+  breadthunits(TOTAL3) &
+  msdepthunits(TOTAL4) &
+  % TODO: ADD MSELECTIVEUNITS ONCE U FIGURE IT OUT
+  plus(TOTAL1,TOTAL2,TOTAL3,TOTAL4,TOTALMSCS)
+  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Satisfiers for this program sheet
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
