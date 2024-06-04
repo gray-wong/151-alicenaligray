@@ -7,6 +7,7 @@
   <link href="ugcs.css" rel="stylesheet">
   <script src="epilog.js"></script>
   <script src="worksheets_2020_01_01.js"></script>
+  <!-- <script src="worksheets.js"></script> -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 
@@ -81,7 +82,10 @@
 
 <!--=========================================================================-->
 
-
+<div><br></div>
+<div>
+  <h1>BSCS Requirements</h1>
+</div>
 
 <!--=========================================================================-->
 <div class="card">
@@ -89,20 +93,21 @@
 <fieldset class='noprint' style="width:100%;border-collapse:collapse;font-family:arial">
   <legend><b>Mathematics</b></legend>
   <div>Changes to the Math requirements must be petitioned to the School of Engineering.</div>
+  <br>
 
-  <a class="show" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+  <!-- <a class="show" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
     Show more details
   </a>
   <div class="collapse" id="collapseExample">
-    <div class="card show-body">
-      <ul style='color:#888888'>
-        <li id="soemath">Ensure that you have petitioned the SoE to count the additional Math courses that are listed and that your petitions have been approved.</li>
+    <div class="card show-body"> -->
+      <ul>
+        <li>Ensure that you have petitioned the SoE to count the additional Math courses that are listed and that your petitions have been approved.</li>
         <li>MATH 19/20/21 or equivalent (10 units AP BC, or transfer, with placement into MATH 51/CME 100) is acceptable. If 6-8 units AP or IB credit are used, must take Math 21 (21 may not be skipped using Math Diagnostic Placement results). AP must be approved by SoE;</li>
         <li>Electives restrictions: CS 157 + Phil 151 may not be combined to satisfy the electives requirement. Students taking both Math 51 & 52 may not count CME 100 as an elective. Students who take both Math 51 & CME 100 will receive only 8 units credit in the major due to overlapping material.</li>
-        <li id="consultapchart">Consult the <a href="https://registrar.stanford.edu/students/transfer-credit-and-advanced-placement/advanced-placement/ap-credit-chart" target="_blank" style="cursor: pointer; color: purple;">AP Chart for 2022-23</a> and adjust AP units accordingly. If you have questions, contact your <a href="http://web.stanford.edu/group/ughb/cgi-bin/handbook/index.php/Departmental_Links" target="_blank" style="cursor: pointer; color: purple;">Department or Student Services Advisor</a>.</li>
+        <li>Consult the <a href="https://registrar.stanford.edu/students/transfer-credit-and-advanced-placement/advanced-placement/ap-credit-chart" target="_blank" style="cursor: pointer; color: purple;">AP Chart for 2022-23</a> and adjust AP units accordingly. If you have questions, contact your <a href="http://web.stanford.edu/group/ughb/cgi-bin/handbook/index.php/Departmental_Links" target="_blank" style="cursor: pointer; color: purple;">Department or Student Services Advisor</a>.</li>
       </ul>
-    </div>
-  </div>
+    <!-- </div>
+  </div> -->
 
 <p></p>
   <span id="req(math1)" style="color:red">Select MATH 19, 20, 21 or AP Calculus (minimum 10 units):</span>
@@ -168,17 +173,18 @@
   <legend><b>Science</b></legend>
   <span>Changes to the Science requirements must be petitioned to the School of Engineering.</span>
   <br>
+  <br>
 
-  <a class="show" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+  <!-- <a class="show" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
     Show more details
   </a>
   <div class="collapse" id="collapseExample">
-    <div class="card show-body">
-      <ul style='color:#888888'>
+    <div class="card show-body"> -->
+      <ul>
         <li>Any course of 3 or more units from the SoE Science List (see Courses page at ughb.stanford.edu), PSYCH 30, or AP Chemistry may be used.</li>
       </ul>
-    </div>
-  </div>
+    <!-- </div>
+  </div> -->
 
 <p></p>
 
@@ -448,9 +454,9 @@
   <span id="req(track3)" style="color:red">Track C: Select <i>one additional</i> course from the following:</span>
   <table>
     <tr>
-      <td width='140'><input type='checkbox' name='track(2)' value='cs112' onchange='modcheck(this)'> CS 112</td>
-      <td width='140'><input type='checkbox' name='track(2)' value='cs140e' onchange='modcheck(this)'> CS 140E</td>
-      <td width='140'><input type='checkbox' name='track(2)' value='cs143' onchange='modcheck(this)'> CS 143</td>
+      <td width='140'><input type='checkbox' name='track(3)' value='cs112' onchange='modcheck(this)'> CS 112</td>
+      <td width='140'><input type='checkbox' name='track(3)' value='cs140e' onchange='modcheck(this)'> CS 140E</td>
+      <td width='140'><input type='checkbox' name='track(3)' value='cs143' onchange='modcheck(this)'> CS 143</td>
       <td width='140'><input type='checkbox' name='track(3)' value='cs144' onchange='modcheck(this)'> CS 144</td>
       <td width='140'><input type='checkbox' name='track(3)' value='cs155' onchange='modcheck(this)'> CS 155</td>
     </tr>
@@ -3371,7 +3377,7 @@
   <div class="card-body">
 <fieldset class='noprint' style="width:100%;border-collapse:collapse;font-family:arial">
   <legend><b>Foundations Requirement</b></legend>
-  <div>You must satisfy the requirements listed in each of the following areas; all courses taken elsewhere must be approved by your advisor on a foundation course waiver form. If you have already applied a course to your undergraduate degree, it will automatically select "Undergrad". Do not count the units from that course.</div>
+  <div>You must satisfy the requirements listed in each of the following areas; all courses taken elsewhere must be approved by your advisor on a foundation course waiver form. If you have already applied a course to your undergraduate degree, it will automatically select "Undergrad". Do not count the units from that course. Please note that if you select a course here by name it will be unselected in the BSCS section of your sheet.</div>
 
 <!--TODO: make sure only one check box in each of these sections can be selected-->
 <p></p>
@@ -3415,7 +3421,7 @@
   <table>
     <tr>
       <td width='140'><input name='foundationssection(4)' onchange='modcheck(this)' type='checkbox' value='cs107'> CS 107</td>
-      <td width='140'><input name='foundationssection(4)' onchange='modcheck(this)' type='checkbox' value='cs107E'> CS 107E</td>
+      <td width='140'><input name='foundationssection(4)' onchange='modcheck(this)' type='checkbox' value='cs107e'> CS 107E</td>
       <td width='140'><input name='foundationssection(4)' onchange='modcheck(this)' type='checkbox' value='ug4'> Undergrad</td>
       <td width='140'><input name='foundationssection(4)' onchange='modcheck(this)' type='checkbox' value='coursesub4'> Course Substitute</td>
     </tr>
@@ -6506,7 +6512,7 @@ provided below.</p>
   <!--=== ELECTIVES START HERE ===-->
   <tr>
     <td><input autoquote="true" id="courseid(elective1)" maxlength="20" onchange="modstring(this)" placeholder="Course Identifier" size="20" type="text"></td>
-    <td><input autoquote="true" id="title(selective1)" maxlength="100" onchange="modstring(this)" placeholder="Course Title" size="70" type="text"></td>
+    <td><input autoquote="true" id="title(elective1)" maxlength="100" onchange="modstring(this)" placeholder="Course Title" size="70" type="text"></td>
     <td><input id="units(elective1)" type="text" size="4" style="text-align:right" onkeypress="return digitp(event.charCode)" onchange="modtext(this)"></td>
 </tr>
 <tr>
@@ -6785,7 +6791,7 @@ requirement(mscs) % at least 45 graduate units
 requirement(nooverlap) % no overlapping between bs and ms courses
 
 requirement(breadthunits) % breadth courses must be taken for at least 3 units
-requirement(depthunits) % depth courses must be taken for at least 3 units
+requirement(msdepthunits) % depth courses must be taken for at least 3 units
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -6920,12 +6926,17 @@ satisfied(foundations5) :- josen(foundationssection(5),coursesub5)
 
 satisfied(sigimp) :- josen(sigsection(1),C)
 
+satisfied(deptha) :- josen(depthsection(1),cs154) & josen(depthsection(1), cs261)
+% satisfied(depthb) :- 
 
-satisfied(breadthunits) :-
-  countofall(C, josen(section(breadthsection(X),Y),C) & units(C,U) & ~min(U,3,3), 0)
 
-satisfied(depthunits) :-
-  countofall(C, josen(section(depthsection(X),Y),C) & units(C,U) & ~min(U,3,3), 0)
+% these two are for the course list
+satisfied(breadthunits) :- 
+  evaluate(countofall(C, josen(breadthsection(X),C) & units(C,U) & leq(U,2)), 0)
+satisfied(msdepthunits) :- 
+  evaluate(countofall(C, josen(depthsection(X),C) & units(C,U) & leq(U,2)), 0)
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% definitions
@@ -7020,7 +7031,7 @@ sigimpunits(TOTALSIGIMP) :-
   sum(L,TOTAL) & % TODO: NOT RIGHT WILL FIX - SUBTRACTNG WRONG THINGS I THINK
   setofall([UNITS1,COURSE1,X1], josen(breadthsection(X1),COURSE1) & same(COURSE,COURSE1) & units(COURSE1,UNITS1), S1) &
   map(first,S1,L1) &
-  sum(L1,TOTAL1)
+  sum(L1,TOTAL1) &
   minus(TOTAL,TOTAL1,TOTALSIGIMP)
   % TODO: FUNCTIONALITY TO ENSURE THAT THE CLASS IS NOT SELECTED IN BREADTH OR DEPTH - if it is then don't count
 
@@ -7029,6 +7040,12 @@ breadthunits(TOTALBREADTH) :-
   map(first,S,L) &
   sum(L,TOTALBREADTH)
   % TODO: FUNCTIONALITY TO ENSURE THAT THE CLASS IS NOT SELECTED IN DEPTH - if it is then don't count
+
+msdepthunits(TOTALDEPTH) :- 
+  setofall([UNITS,COURSE,X], josen(depthsection(X),COURSE) & units(COURSE,UNITS), S) &
+  map(first,S,L) &
+  sum(L,TOTALDEPTH)
+  % TODO: FUNCTIONALITY TO ENSURE THAT THE CLASS IS NOT SELECTED IN BREADTH - if it is then don't count
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Satisfiers for this program sheet
@@ -7572,10 +7589,22 @@ select(number(COURSE),N) :: number(COURSE,N)
 select(number(COURSE),N) :: number(COURSE,M) ==> ~number(COURSE,M)
 value(number(COURSE),N) :- number(COURSE,N)
 
+% grad course list course ids
+select(courseid(COURSE),N) :: courseid(COURSE,N)
+select(courseid(COURSE),N) :: courseid(COURSE,M) ==> ~courseid(COURSE,M)
+value(courseid(COURSE),N) :- courseid(COURSE,N)
+
+% grad course list titles
 select(title(COURSE),T) :: title(COURSE,T)
 select(title(COURSE),T) :: title(COURSE,S) ==> ~title(COURSE,S)
 value(title(COURSE),T) :- title(COURSE,T)
 
+% grad course list units
+select(units(COURSE),N) :: distinct(N,error) ==> courseunits(COURSE,N)
+select(units(COURSE),N) :: courseunits(COURSE,M) ==> ~courseunits(COURSE,M)
+value(units(COURSE),UNITS) :- units(COURSE,UNITS)
+
+% undergrad units
 select(units(REQT,COURSE),N) :: courseunits(COURSE,N)
 select(units(REQT,COURSE),N) :: courseunits(COURSE,M) ==> ~courseunits(COURSE,M)
 value(units(REQT,COURSE),UNITS) :- units(COURSE,UNITS)
@@ -7988,7 +8017,7 @@ course(cs143,"CS","143","Compilers",4)
 course(cs144,"CS","144","Introduction to Computer Networking",4)
 course(cs145,"CS","145","Introduction to Databases",4)
 course(cs146,"CS","146","Introduction to Game Design and Development",3)
-course(cs147,"CS","147","Introduction to Human-Computer Interaction Design",5)
+course(cs147,"CS","147","Introduction to Human-Computer Interaction Design",1)
 course(cs148,"CS","148","Introduction to Computer Graphics and Imaging",4)
 course(cs149,"CS","149","Parallel Computing",4)
 course(cs151,"CS","151","Logic Programming",3)
