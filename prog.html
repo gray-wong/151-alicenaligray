@@ -3435,10 +3435,10 @@
     <tr></tr>
       <td width='140'><input name='sigsection(1)' onchange='modcheck(this)' type='checkbox' value='cs151'> CS 151</td>
       <td width='140'><input name='sigsection(1)' onchange='modcheck(this)' type='checkbox' value='cs190'> CS 190</td>
-      <td width='140'><input name='sigsection(1)' onchange='modcheck(this)' type='checkbox' value='cs210B'> CS 210B</td>
+      <td width='140'><input name='sigsection(1)' onchange='modcheck(this)' type='checkbox' value='cs210b'> CS 210B</td>
       <td width='140'><input name='sigsection(1)' onchange='modcheck(this)' type='checkbox' value='cs212'> CS 212</td>
       <td width='140'><input name='sigsection(1)' onchange='modcheck(this)' type='checkbox' value='cs221'> CS 221</td>
-      <td width='140'><input name='sigsection(1)' onchange='modcheck(this)' type='checkbox' value='cs227B'> CS 227B</td>
+      <td width='140'><input name='sigsection(1)' onchange='modcheck(this)' type='checkbox' value='cs227b'> CS 227B</td>
     </tr>
     <tr></tr>
       <td width='140'><input name='sigsection(1)' onchange='modcheck(this)' type='checkbox' value='cs231n'> CS 231N</td>
@@ -7272,10 +7272,8 @@ requirement(foundations4) % must have class for computer organization and system
 requirement(foundations5) % must have class for principles of computer science
 
 requirement(sigimp) % must have class for significant implementation within sigsection(1)
-% sigimp CAN ALSO be used to satisfy breadth, depth, elective!
 
 requirement(breadth) % must have three courses (different areas & 3 units already programmed into sheet)
-% breadth CAN ALSO be used to satisfy sigimp, depth, elective!
 
 requirement(deptha) % cs 154 & cs 261
 requirement(depthb) % at least 21 units of courses from depthsection(2)
@@ -7285,12 +7283,10 @@ requirement(depthb) % at least 21 units of courses from depthsection(2)
 requirement(electives1) % maximum three units of 1-2 unit seminars counted in electivessection(2), which is for seminars only
 requirement(electives2) % all chosen classes in electivessection(3), which are NOT seminars, must be taken for at least 3 units
 requirement(electives3) % cannot choose courses 111 or below, 161a, 196, 198, 390a/b/c
-requirement(electives4) % any chosen non-cs course must be technical, above 100, and approved by addvisor
+requirement(electives4) % any chosen non-cs course must be technical, above 100, and approved by advisor
 requirement(electives5) % cs 129 cannot be counted towards mscs degree if cs 229 is being counted towards any bs or ms req
 
 requirement(totalms) % at least 45 graduate units
-
-requirement(nooverlap) % no overlapping between bs and ms courses
 
 requirement(breadthunits) % breadth courses must be taken for at least 3 units
 requirement(msdepthunits) % depth courses must be taken for at least 3 units
@@ -7379,7 +7375,6 @@ satisfied(track5) :- josen(track(5),COURSE)
 satisfied(track6) :- countofall(COURSE, josen(track(6),COURSE),N) & geq(N,2)
 satisfied(track7) :- trackunits(TOTAL) & geq(TOTAL,25)
 
-
 %%%%%% Depth %%%%%%
 satisfied(depth1) :- depthunits(TOTAL) & geq(TOTAL,25)
 
@@ -7401,9 +7396,6 @@ wimcourse(cs294w)
 
 %%%%%%%%%% MSCS Rules %%%%%%%%%%
 %%%%%% Foundations %%%%%%
-% TODO: IF CS__ IS NOT FILLED IN BSCS HAVE SOME SORT OF TEXT THAT SAYS WE CANT WAIVE UG
-% TODO: TRY TO FIND WAY SO THAT U CANT EVEN CHECK THE BOX IF CS103 ISNT CHECKED FOR BSCS
-% TODO: UNDERGRAD CANT AUTOMATICALLY BE CHECKED FOR SOME REASON LOOK INTO THAT
 
 satisfied(foundations1) :- josen(foundationssection(1),cs103) 
 satisfied(foundations1) :- josen(foundationssection(1),ug1) & josen(mathsection(2),cs103)
@@ -7445,13 +7437,13 @@ satisfied(deptha) :- josen(depthsection(1),cs154) & josen(depthsection(1), cs261
 satisfied(depthb) :- msdepthunits(TOTAL) & geq(TOTAL, 21)
 
 %%%%%% Course List %%%%%%
-% these two are for the course list
 satisfied(breadthunits) :- 
   evaluate(countofall(C, josen(breadthsection(X),C) & units(C,U) & leq(U,2)), 0)
 satisfied(msdepthunits) :- 
   evaluate(countofall(C, josen(depthsection(X),C) & units(C,U) & leq(U,2)), 0)
 
 satisfied(totalms) :- mscsunits(TOTALMSCS) & geq(TOTALMSCS, 45)
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% definitions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -7588,9 +7580,12 @@ msdepthunits(TOTALDEPTH) :-
   map(first,S,L) &
   sum(L,TOTALDEPTH)
 
+getelectives(ELECTIVE, UNITS) :-
+  courseunits(ELECTIVE, UNITS) & distinct(UNITS, error) & ~josen(X, ELECTIVE)
+
 mselectiveunits(TOTALELECTIVES) :- 
-  setofall([UNITS,ELECTIVE], courseunits(ELECTIVE,UNITS) & distinct(UNITS,error), S) &
-  map(first,S,L) &
+  setofall([UNITS, ELECTIVE], member(ELECTIVE, [elective1, elective2, elective3, elective4, elective5, elective6, elective7, elective8, elective9]) & getelectives(ELECTIVE, UNITS), S) & 
+  map(first,S,L) & 
   sum(L,TOTALELECTIVES)
 
 mscsunits(TOTALMSCS) :- 
@@ -7861,29 +7856,30 @@ courses(senior(1),cs294)
 
 % MSCS Courses
 courses(foundationssection(1),cs103)
-courses(foundationssection(1),ug)
-courses(foundationssection(1),coursesub)
+courses(foundationssection(1),ug1)
+courses(foundationssection(1),coursesub1)
 
 courses(foundationssection(2),cs109)
 courses(foundationssection(2),stats116)
 courses(foundationssection(2),cme106)
 courses(foundationssection(2),ee178)
 courses(foundationssection(2),mse220)
-courses(foundationssection(2),ug)
+courses(foundationssection(2),ug2)
+courses(foundationssection(2),coursesub2)
 
 courses(foundationssection(3),cs161)
-courses(foundationssection(3),ug)
-courses(foundationssection(3),coursesub)
+courses(foundationssection(3),ug3)
+courses(foundationssection(3),coursesub3)
 
 courses(foundationssection(4),cs107)
 courses(foundationssection(4),cs107e)
-courses(foundationssection(4),ug)
-courses(foundationssection(4),coursesub)
+courses(foundationssection(4),ug4)
+courses(foundationssection(4),coursesub4)
 
 courses(foundationssection(5),cs110)
 courses(foundationssection(5),cs111)
-courses(foundationssection(5),ug)
-courses(foundationssection(5),coursesub)
+courses(foundationssection(5),ug5)
+courses(foundationssection(5),coursesub5)
 
 courses(sigsection(1),cs140)
 courses(sigsection(1),cs140e)
@@ -7905,7 +7901,7 @@ courses(sigsection(1),cs248a)
 courses(sigsection(1),cs248b)
 courses(sigsection(1),cs330)
 courses(sigsection(1),cs341)
-courses(sigsection(1),ug)
+courses(sigsection(1),twoundergrad)
 
 courses(breadthsection(1),cs154)
 courses(breadthsection(1),cs157)
@@ -8080,11 +8076,9 @@ value(msquarter,S) :- true(val(msquarter,S),metadata)
 value(msyear,S) :- true(val(msyear,S),metadata)
 value(date,S) :- true(val(date,S),metadata)
 
-
 attribute(studentnotes,disabled,true) :- ~true(val(client,student),metadata)
 attribute(advisornotes,disabled,true) :- ~true(val(client,advisor),metadata)
 attribute(adminnotes,disabled,true) :- ~true(val(client,admin),metadata)
-
 
 style(save,display,"") :- 
   true(val(client,student),metadata)
@@ -8098,7 +8092,6 @@ style(submitit,display,"") :-
 style(withdraw,display,"") :- 
   true(val(client,student),metadata) &
   true(val(submittime,T),metadata)
-
 
 style(confirm,display,"") :- 
   true(val(client,admin),metadata) &
@@ -8211,7 +8204,6 @@ math(2,math20)
 math(2,math21)
 math(3,mathap)
 
-
 select(mathsection(3),X) ::
   mutexmath(N,X) & mutexmath(N,Y) ==> ~josen(mathsection(3),Y)
 
@@ -8236,7 +8228,6 @@ sci(1,phys23)
 sci(2,phys43)
 sci(3,phys63)
 sci(3,phys81)
-
 
 select(sciencesection(3),X) ::
   josen(sciencesection(3),Y) ==> ~josen(sciencesection(3),Y)
@@ -8273,7 +8264,6 @@ mutexgroup(3,engr40m)
 mutexgroup(4,cs106b)
 mutexgroup(4,cs106x)
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 select(core(N),X) :: josen(core(N),Y) ==> ~josen(core(N),Y)
@@ -8281,13 +8271,9 @@ select(core(N),X) :: josen(core(N),Y) ==> ~josen(core(N),Y)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 select(track(1),X) :: josen(track(1),Y) ==> ~josen(track(1),Y)
-
 select(track(3),X) :: josen(track(3),Y) ==> ~josen(track(3),Y)
-
 select(track(4),X) :: josen(track(4),Y) ==> ~josen(track(4),Y)
-
 select(track(5),X) :: josen(track(5),Y) ==> ~josen(track(5),Y)
-
 
 select(senior(1),X) :: josen(senior(1),Y) ==> ~josen(senior(1),Y)
 
@@ -8389,12 +8375,10 @@ mathelective(mathelective2)
 mathelective(mathelective3)
 mathelective(mathelective4)
 
-
 style(math51cme100, color, "#0000ff") :-  math51cme100
 style(math51cme100, color, "#888888") :- ~math51cme100
 
 math51cme100 :- josen(SECTION,math51) & josen(OTHER,cme100)
-
 
 style(soescience, display, "") :- extrascience
 style(soescience, display, "none") :- ~extrascience
@@ -8406,7 +8390,6 @@ scienceelective(scienceelective2)
 scienceelective(scienceelective3)
 scienceelective(scienceelective4)
 
-
 style(soefundamental, display, "") :- extrafundamental
 style(soefundamental, display, "none") :- ~extrafundamental
 
@@ -8417,7 +8400,6 @@ fundamentalelective(fundamentalelective2)
 fundamentalelective(fundamentalelective3)
 fundamentalelective(fundamentalelective4)
 
-
 style(apalert,display,"") :- aptaken
 style(apalert,display,"none") :- ~aptaken
 
@@ -8427,7 +8409,6 @@ apcourse(mathap)
 apcourse(physap1)
 apcourse(physap2)
 apcourse(chemap)
-
 
 style(consultapchart, color, "#0000ff") :- consultapchart
 style(consultapchart, color, "888888") :- ~consultapchart
@@ -8440,7 +8421,6 @@ style(row(X), display, "none") :- isundergrad(X)
 
 style(twoundergrad, display, "") :- josen(sigsection(1),twoundergradbox)
 style(twoundergrad, display, "none") :- ~josen(sigsection(1),twoundergradbox)
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
