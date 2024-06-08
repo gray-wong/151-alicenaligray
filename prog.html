@@ -595,7 +595,6 @@
       <td width='140'><input type='checkbox' name='track(6)' value='ee282' onchange='modcheck(this)'> EE 282</td>
     </tr>
   </table>
-<!-- TODO: add electives/recalculate core4? -->
   <p><span id="req(track7)" style="font-variant:small-caps;font-weight:bold;color:red">Core units (minimum 25):</span> <input disabled="true" id="totalunits(track)" size='2' style="font-weight:bold;font-size:18;color:black" type="text" value="0"></p>
 </fieldset>
 </div></div>
@@ -7277,9 +7276,7 @@ requirement(breadth) % must have three courses (different areas & 3 units alread
 
 requirement(deptha) % cs 154 & cs 261
 requirement(depthb) % at least 21 units of courses from depthsection(2)
-% TODO: MULTIPLE CS 359, 369, AND 468 COURSES MAY BE TAKEN SO LONG AS THEY ARE ON DIFF TOPICS - MIGHT NEED TO MAKE DROPDOWN FOR THESE
 
-% TODO: MAY NEED TO REDEFINE ELECTIVES LATER
 requirement(electives1) % maximum three units of 1-2 unit seminars counted in electivessection(2), which is for seminars only
 requirement(electives2) % all chosen classes in electivessection(3), which are NOT seminars, must be taken for at least 3 units
 requirement(electives3) % cannot choose courses 111 or below, 161a, 196, 198, 390a/b/c
@@ -8436,7 +8433,7 @@ innerhtml(lastupdated,X) :- lastupdated(X)
 
 <dataset id="catalog" style="display:none;" type="text/hrf">
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Catalog 2020-2021
+%%% Catalog 2023-2024
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 course(aa252,"AA","252","Techniques of Failure Analysis",3)
 course(engr76,"ENGR","76","Information Science and Engineering",5)
